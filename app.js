@@ -1,33 +1,28 @@
-// app-express-connection
-    const express = require('express')
-    const app = express()
-// port 3000
-    const port = process.env.PORT || 3000;
-// DB-connection 
-    const db = require("./config/db-config");
+
+const express = require('express')
+const app = express()
+const mongoose = require("mongoose")
+const dotenv = require('dotenv')
+const db = require("./config/db-config");
+const AdminRouter = require("./routes/admin-route");
+const clientRouter = require("./routes/client-route");
 // app-env-connection
-    const dotenv = require('dotenv')
-    dotenv.config();
-// middleware 
-    const AdminRouter = require("./routes/admin-route");
-    // const CommonRouter = require("./routes/common-route");
-    // const clientRouter = require("./routes/client-route");
-    // const frontendRouter = require("./routes/frontend-route");
+dotenv.config();
+// port number
+const port = process.env.PORT || 5000;
+// database connection
+//mongoose.connect(process.env.DB_CONNECT,{ useNewUrlParser: true, useUnifiedTopology: true }).then(() => {console.log("databes has been conected")}).catch((err) => {console.log(err)})
+db();
+app.use(express.json());
 
 app.get("/api/", (req, res) => {
     res.send("welcome to global immigration consultant property sell api");
 });
+ 
+app.use("/api/admin", AdminRouter);
+app.use("/api/client", clientRouter);
 
-// // app-use middleware function with prefix route path    
-    app.use("/api/admin", AdminRouter);
-    // app.use("/api/common", CommonRouter);
-    // app.use("/api/client", clientRouter);
-    // app.use("/api/app", frontendRouter);
-// app-main-db
-   // mongoose.connect(process.env.DB_CONNECT);
-       db();
-// app-listen-connection
-    app.listen(port, () => console.log(` App listening on port ${port}!`))
+app.listen(port, () => console.log(` App listening on port ${port}!`))
    
 
 
