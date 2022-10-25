@@ -5,7 +5,7 @@ dotenv.config();
 
 const DB_CONNECT =process.env.DB_CONNECT;
 
-const db = async () => {
+const dbconnection = async () => {
     try {
         
         await mongoose.connect(
@@ -20,4 +20,4 @@ const db = async () => {
     }
 }
 
-module.exports = db 
+module.exports = dbconnection 

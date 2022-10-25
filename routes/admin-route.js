@@ -2,7 +2,7 @@
 const express = require('express');
 const AdminRoute = express.Router();
 // call Admin model
-const Admin = require('../Model/Admin');
+const Admin = require('../Models/Admin');
 
 // Routes
     // GET() ->fetching data
@@ -16,3 +16,5 @@ const Admin = require('../Model/Admin');
 
 //router-exports-form-route-namespaces
     module.exports = AdminRoute;
+
+    
