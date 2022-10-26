@@ -37,10 +37,10 @@ const SiteSettingSchema = new mongoose.Schema(
         youtube:{
             type: String,
         },
-        date:{
-            type:String, 
-            default:Date.now 
-        },
+        // date:{
+        //     type:String, 
+        //     default:Date.now 
+        // },
     },
     { timestamps: true }
 );

@@ -27,10 +27,10 @@ const AdminSchema = new mongoose.Schema(
             type: String,
             default:"admin",
         },
-        date:{
-            type:String, 
-            default:Date.now 
-        },
+        // date:{
+        //     type:String, 
+        //     default:Date.now 
+        // },
     },
     { timestamps: true }
 );

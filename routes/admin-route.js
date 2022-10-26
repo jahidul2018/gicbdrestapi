@@ -10,7 +10,7 @@ const Admin = require('../Models/Admin');
     // Put() -> updating data, 
     // Delete() -> deleting data
     
-    AdminRoute.get('/', (req, res) => res.send('this is admin route!'))
+    AdminRoute.get('/',  (req, res) => res.send('this is admin route!'))
     AdminRoute.get('/counselor', (req, res) => res.send('this is admin counselor api!'))
     AdminRoute.post('/signup', (req, res) => {  console.log(req.body)   });
 

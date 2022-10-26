@@ -30,9 +30,9 @@ const CounselorSchema = new mongoose.Schema(
             required: [true, "Please add you phone number"],
             unique:[true,"phone number already exit"],
         },
-        CounselorImage: {
+        counselorImage: {
             type: String,
-            required: [true, "Please add you counselor image"],
+            //required: [true, "Please add you counselor image"],
         },
         facebookLink: {
             type: String,
@@ -54,10 +54,10 @@ const CounselorSchema = new mongoose.Schema(
             type: String,
             default:"counselor",
         },
-        date:{
-            type:String, 
-            default:Date.now 
-        },
+        // date:{
+        //     type:String, 
+        //     default:Date.now 
+        // },
     },
     { timestamps: true }
 );

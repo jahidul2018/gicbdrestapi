@@ -14,10 +14,10 @@ const SuccessStorySchema = new mongoose.Schema(
             type: String,
             required: [true, "Please add you Story Image"],
         },
-        date:{
-            type:String, 
-            default:Date.now 
-        },
+        // date:{
+        //     type:String, 
+        //     default:Date.now 
+        // },
     },
     { timestamps: true }
 );

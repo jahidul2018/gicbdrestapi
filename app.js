@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const mongoose = require("mongoose")
 const dotenv = require('dotenv')
+const errorHandler = require('./middleware/errors');
 const db = require("./config/db-config");
 
 //routee middleware 
@@ -37,6 +38,10 @@ app.use("/api/site-settings", SiteSettingRouter);
 app.use("/api/counselors", CounselorRouter);
 app.use("/api/success-stories", SuccessStoryRouter);
 
+// custom error handlers for try catch function
+app.use(errorHandler);
+
+//app listning port
 app.listen(port, () => console.log(` App listening on port ${port}!`))
    
 
