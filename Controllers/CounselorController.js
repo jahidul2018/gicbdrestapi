@@ -13,7 +13,7 @@ exports.create = tryTocatchFn( async (req, res, next) => {
 
     if(!email || !name || !title || !details || !phoneNumber || !counselorImage) {
         return next(
-            new ErrorResponse(`Please provide data`, 422, false)
+            new ErrorResponse(`Please provide data`, 400, false)
         );
     }
 
@@ -26,7 +26,7 @@ exports.create = tryTocatchFn( async (req, res, next) => {
     //check for existing record
     if(counselorCount > 0) {
         return next(
-            new ErrorResponse(`Phone number already exists`, 422, false)
+            new ErrorResponse(`Phone number already exists`, 400, false)
         );
     }
     // create a counselor 
@@ -52,36 +52,33 @@ exports.findAll = tryTocatchFn( async (req, res, next) =>
 // Find a single note with a counselorId
 exports.findOne = tryTocatchFn( async (req, res, next) => {
     const counselor = await Counselor.findById(req.params.counselorId);
-    if (!counselors) {
+    if (!counselor) {
         return next(
             new ErrorResponse(`No counselors found with this info`, 400)
         );
     }
-    res.status(200).json({  success: true, data: counselor });
+    res.status(200).json({  success: true, data: counselor , message: "Counselor found"});
 });
 
 // Update a note identified by the counselorId in the request
 exports.update = tryTocatchFn( async (req, res, next) => {
 
-    const {email, name, title, details, phoneNumber, CounselorImage,} = req.body;
+    const {email, name, title, details, phoneNumber, counselorImage} = req.body;
 
-    if(!email || !name || !title || !details || !phoneNumber || !CounselorImage) {
+    if(!email || !name || !title || !details || !phoneNumber || !counselorImage) {
         return next(
             new ErrorResponse(`Please provide data`, 400)
         );
     }
-
-    // 
-     const counselor = await Counselor.findByIdAndUpdate(
-    req.counsslor.counselorId,
+    //  
+    const counselor = await Counselor.findByIdAndUpdate(
+    req.params.counselorId,
     {
-     email, name, title, details, phoneNumber, CounselorImage,
+     email, name, title, details, phoneNumber, counselorImage
     },
     { new: true }
   );
-
-  res.status(200).json({success: true,mesage: "successfully updated",data: counselor,});
-
+  res.status(200).json({success: true, mesage: "successfully updated", data: counselor,});
 });
 
 // Delete a note with the specified counselorId in the request

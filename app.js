@@ -36,7 +36,7 @@ app.use("/api/admins", AdminRouter);
 app.use("/api/clients", ClientRouter);
 app.use("/api/site-settings", SiteSettingRouter);
 app.use("/api/counselors", CounselorRouter);
-app.use("/api/success-stories", SuccessStoryRouter);
+app.use("/api/stories", SuccessStoryRouter);
 
 // custom error handlers for try catch function
 app.use(errorHandler);

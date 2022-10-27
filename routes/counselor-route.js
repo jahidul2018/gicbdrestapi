@@ -1,7 +1,7 @@
 const express= require('express');
 const CounselorRouter =express.Router();
 
-const Counselor = require('../Controllers/CounselorController.js');
+const Counselor = require('../Controllers/CounselorController');
 
 // Routes
     // GET() ->fetching data

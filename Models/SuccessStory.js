@@ -1,16 +1,15 @@
 const mongoose = require("mongoose");
-
 const SuccessStorySchema = new mongoose.Schema(
     {
         name: {
             type: String,
             required: [true, "Please add you name"],
         },
-         StroyUrl: {
+         storyUrl: {
             type: String,
             required: [true, "Please add you Stroy Url"],
         },
-         StoryImage: {
+         storyImage: {
             type: String,
             required: [true, "Please add you Story Image"],
         },

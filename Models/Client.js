@@ -31,11 +31,11 @@ const ClientSchema = new mongoose.Schema(
         //     required: [true, "Please add you client type"],
         //     enum: ['subscription', 'non-subscription'],'], 
         // }
-        // phoneNumber: {
-        //     type: String,
-        //     required: [true, "Please add you phone number"],
-        //     unique:[true,"phone number already exit"],
-        // },
+        phoneNumber: {
+            type: String,
+            // required: [true, "Please add you phone number"],
+            // unique:[true,"phone number already exit"],
+        },
         role: {
             type: String,
             default:"client",
