@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const AdminSchema = new mongoose.Schema(
     {
@@ -34,5 +36,25 @@ const AdminSchema = new mongoose.Schema(
     },
     { timestamps: true }
 );
+
+//adminSchema password pre save
+adminSchema.pre("save", async function (next) {
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
+// Verify password
+adminSchema.methods.verifyPassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
+
+// get token
+adminSchema.methods.generateToken = function () {
+  return jwt.sign({ id: this._id }, process.env.ADMIN_PASSWORD_SECRET, {
+    expiresIn: "3d",
+  });
+};
+
+
 
 module.exports = mongoose.model("Admin", AdminSchema);
