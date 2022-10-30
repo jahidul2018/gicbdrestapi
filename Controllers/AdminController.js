@@ -3,18 +3,19 @@ const tryTocatchFn = require("../middleware/tryTocatchFn");
 const ErrorResponse = require("../helper/errorResponse");
 const AdminModel = require("../models/Admin");
 
-
 exports.register = tryTocatchFn(async (req, res, next) => {
-  const { name, email, password, phone } = req.body;
+  const { name, email, password, phoneNumber } = req.body;
+
+  console.log(req.body);
 
   //check fields
-  if (!name || !email || !password || !phone) {
+  if (!name || !email || !password || !phoneNumber) {
     return next(new ErrorResponse("Field should not be empty", 400));
   }
 
-  //check for email and phone
+  //check for email and phoneNumber
   const adminCount = await AdminModel.countDocuments({
-    $or: [{ email: email }, { phone: phone }],
+    $or: [{ email: email }, { phoneNumber: phoneNumber }],
   });
 
   if (adminCount) {
@@ -29,7 +30,7 @@ exports.register = tryTocatchFn(async (req, res, next) => {
   const admin = await AdminModel.create({
     name,
     email,
-    phone,
+    phoneNumber,
     password,
   });
 
@@ -38,12 +39,15 @@ exports.register = tryTocatchFn(async (req, res, next) => {
     status: 200,
     message: "admin successfully created",
   });
+  // res.status(200).json(admin);
 });
 
 
 exports.signin = tryTocatchFn(async (req, res, next) => {
   // get the parameters
   const { email, password } = req.body;
+
+  // console.log(email, password);
 
   //check fields
   if (!email || !password) {
