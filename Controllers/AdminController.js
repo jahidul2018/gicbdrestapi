@@ -47,7 +47,7 @@ exports.signin = tryTocatchFn(async (req, res, next) => {
   // get the parameters
   const { email, password } = req.body;
 
-  // console.log(email, password);
+  console.log(email, password);
 
   //check fields
   if (!email || !password) {
@@ -58,7 +58,9 @@ exports.signin = tryTocatchFn(async (req, res, next) => {
 
   //get admin with email
 //   const admin = await AdminModel.findOne({ email }).select("+password");
-  const admin = await AdminModel.findOne({ email });
+   const admin = await AdminModel.findOne({ email });
+
+   console.log(admin);
 
   if (!admin) {
     return next(new ErrorResponse("User does not exits with this info", 400));

@@ -65,7 +65,7 @@ exports.update = tryTocatchFn( async (req, res, next) => {
 
     const {email, name, title, details, phoneNumber, counselorImage} = req.body;
 
-    if(!email || !name || !title || !details || !phoneNumber || !counselorImage) {
+    if(!email || !name || !title || !details || !phoneNumber) {
         return next(
             new ErrorResponse(`Please provide data`, 400)
         );
@@ -78,7 +78,7 @@ exports.update = tryTocatchFn( async (req, res, next) => {
     },
     { new: true }
   );
-  res.status(200).json({success: true, mesage: "successfully updated", data: counselor,});
+  res.status(200).json({success: true, message: "successfully updated", data: counselor,});
 });
 
 // Delete a note with the specified counselorId in the request
