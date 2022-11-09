@@ -13,7 +13,7 @@ exports.create = tryTocatchFn( async (req, res, next) => {
 
     if(!email || !name || !title || !details || !phoneNumber || !counselorImage) {
         return next(
-            new ErrorResponse(`Please provide data`, 400, false)
+            new ErrorResponse(`Please provide requie data`, 400, false)
         );
     }
 
@@ -33,7 +33,7 @@ exports.create = tryTocatchFn( async (req, res, next) => {
     const counselor = await Counselor.create({
         email,name,title,details,phoneNumber,counselorImage
     });
-    res.status(200).json({  success: true, data: counselor });
+    res.status(200).json({  success: true, data: counselor , message:"Data Save Successfully!" });
 });
 
 // Retrieve and return all counselors from the database.
@@ -45,7 +45,7 @@ exports.findAll = tryTocatchFn( async (req, res, next) =>
             new ErrorResponse(`No counselors found`, 400)
         );
     }
-    res.status(200).json({  success: true, data: counselors });
+    res.status(200).json({  success: true, data: counselors, message:"Data found"  });
 
 });
 
@@ -78,7 +78,7 @@ exports.update = tryTocatchFn( async (req, res, next) => {
     },
     { new: true }
   );
-  res.status(200).json({success: true, message: "successfully updated", data: counselor,});
+  res.status(200).json({success: true, message: "data successfully updated", data: counselor,});
 });
 
 // Delete a note with the specified counselorId in the request
