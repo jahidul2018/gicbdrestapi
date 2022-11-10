@@ -11,7 +11,7 @@ const { request } = require("express");
 exports.create = tryTocatchFn( async (req, res, next) => {
     // // validate request
     console.log(req.body);
-    const {name, email, message} = req.body;
+    const {name, email, message, subject, phoneNumber} = req.body;
 
     if(!name || !email || !message) {
         return next(
@@ -50,7 +50,7 @@ exports.sendMessage = tryTocatchFn( async (req, res, next) => {
 exports.findAll = tryTocatchFn( async (req, res, next) => 
 {
     const client= await Client.find();
-    if (!successStories) {
+    if (!client) {
         return next(
             new ErrorResponse(`No client found`, 400)
         );
@@ -63,7 +63,7 @@ exports.findOne = tryTocatchFn( async (req, res, next) => {
     const client = await Client.findById(req.params.storyId);
     if (!client) {
         return next(
-            new ErrorResponse(`No successStory found with this info`, 400)
+            new ErrorResponse(`No client found!`, 400)
         );
     }
     res.status(200).json({  success: true, data: client , message: "client found"});
@@ -97,7 +97,7 @@ exports.delete = tryTocatchFn( async (req, res, next) =>{
     const client = await Client.findByIdAndDelete(req.params.clientId);
     if (!client) {
         return next(
-            new ErrorResponse(`No client found with this info`, 400)
+            new ErrorResponse(`No client found!`, 400)
         );
     }
     res.status(200).json({  success: true, message:`deleted successfully!`, data: client });

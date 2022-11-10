@@ -9,7 +9,7 @@ const Counselor = require("../Models/Counselor");
 // Create and Save a new counselor
 exports.create = tryTocatchFn( async (req, res, next) => {
     // // validate request
-    const {email, name, title, details, phoneNumber, counselorImage} = req.body;
+    const {email, name, title, details, phoneNumber, counselorImage, facebookLink, whatsappLink } = req.body;
 
     if(!email || !name || !title || !details || !phoneNumber || !counselorImage) {
         return next(
@@ -31,7 +31,7 @@ exports.create = tryTocatchFn( async (req, res, next) => {
     }
     // create a counselor 
     const counselor = await Counselor.create({
-        email,name,title,details,phoneNumber,counselorImage
+        email,name,title,details,phoneNumber,counselorImage, facebookLink, whatsappLink
     });
     res.status(200).json({  success: true, data: counselor , message:"Data Save Successfully!" });
 });
@@ -74,7 +74,7 @@ exports.update = tryTocatchFn( async (req, res, next) => {
     const counselor = await Counselor.findByIdAndUpdate(
     req.params.counselorId,
     {
-     email, name, title, details, phoneNumber, counselorImage
+     email, name, title, details, phoneNumber, counselorImage , facebookLink, whatsappLink
     },
     { new: true }
   );
