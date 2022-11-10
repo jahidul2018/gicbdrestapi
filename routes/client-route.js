@@ -16,7 +16,7 @@ const Client = require('../Controllers/ClientController');
     ClientRoute.post('/', Client.create);
 
     //send message
-    ClientRoute.post('/', Client.sendMessage);
+    ClientRoute.post('/send-message', Client.sendMessage);
 
     // Retrieve all client
     ClientRoute.get('/', Client.findAll);

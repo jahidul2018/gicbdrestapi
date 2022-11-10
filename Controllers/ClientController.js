@@ -34,9 +34,9 @@ exports.sendMessage = tryTocatchFn( async (req, res, next) => {
     console.log(req.body);
     const {name, email, message, subject, phoneNumber} = req.body;
 
-    if(!name || !email || !message  ||(!subject || !phoneNumber )) {
+    if(!name || !email || !message ) {
         return next(
-            new ErrorResponse(`Please provide data! wrong data!`, 400, false)
+            new ErrorResponse(`Please provide data!`, 400, false)
         );
     }
 

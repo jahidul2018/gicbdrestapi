@@ -23,7 +23,7 @@ exports.create = tryTocatchFn( async (req, res, next) => {
             name, storyUrl, storyImage
         });
     //return 200 response with data
-    res.status(200).json({  success: true, data: successStory });
+    res.status(200).json({  success: true, data: successStory, message: "success story created" });
 });
 
 // Retrieve and return all SuccessStory from the database.
@@ -56,7 +56,7 @@ exports.update = tryTocatchFn( async (req, res, next) => {
     // console.log(req.body);
     const {name, storyUrl, storyImage} = req.body;
 
-    if(!name || !storyUrl || !storyImage) {
+    if(!name || !storyUrl) {
         return next(
             new ErrorResponse(`Please provide data`, 400)
         );
@@ -69,7 +69,7 @@ exports.update = tryTocatchFn( async (req, res, next) => {
     },
     { new: true }
   );
-  res.status(200).json({success: true, mesage: "successfully updated", data: successStory,});
+  res.status(200).json({success: true, message: "successfully updated", data: successStory,});
 });
 
 // Delete a note with the specified storyId in the request
