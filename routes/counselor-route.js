@@ -21,8 +21,14 @@ const { isAdmin } = require('../middleware/auth');
     CounselorRouter.get('/', isAdmin, Counselor.findAll);
 
     // Retrieve a single counsolor with counsolorId
-    CounselorRouter.get('/:counselorId', isAdmin, Counselor.findOne);
+    CounselorRouter.get('/open', Counselor.openfindAll);
 
+    // Retrieve a single counsolor with counsolorId
+    CounselorRouter.get('/open/:counselorId', Counselor.openfindOne);
+
+    // Retrieve a single counsolor with counsolorId
+    CounselorRouter.get('/:counselorId', isAdmin, Counselor.findOne);
+   
     // Update a Note with counsolorId
     CounselorRouter.put('/:counselorId', isAdmin, Counselor.update);
 

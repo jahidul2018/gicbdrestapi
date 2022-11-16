@@ -1,7 +1,7 @@
 //const { request } = require("express");
 const mongoose = require("mongoose");
 
-const tryTocatchFn = require("../middleware/tryTocatchFn");
+const tryTocatchFn = require("../middleware/tryToCatchFn");
 const ErrorResponse = require("../helper/errorResponse");
 
 const Client = require("../Models/Client");
@@ -27,6 +27,24 @@ exports.create = tryTocatchFn( async (req, res, next) => {
     res.status(200).json({  success: true, data: client });
 });
 
+//client step and Save a new Client
+exports.step = tryTocatchFn( async (req, res, next) => {
+    // // validate request
+    console.log(req.body);
+    const {name, email, } = req.body;
+
+    if(!name || !email) {
+        return next(
+            new ErrorResponse(`Please provide data!`, 400, false)
+        );
+    }
+
+    // send message 
+        const client = await Client.create(req.body);
+    //return 200 response with data
+    res.status(200).json({  success: true, data: client , message: "Thank you for email! "});
+});
+
 
 // send message and Save a new Client
 exports.sendMessage = tryTocatchFn( async (req, res, next) => {
@@ -34,7 +52,7 @@ exports.sendMessage = tryTocatchFn( async (req, res, next) => {
     console.log(req.body);
     const {name, email, message, subject, phoneNumber} = req.body;
 
-    if(!name || !email || !message ) {
+    if(!name || !email ) {
         return next(
             new ErrorResponse(`Please provide data!`, 400, false)
         );
@@ -58,9 +76,9 @@ exports.findAll = tryTocatchFn( async (req, res, next) =>
     res.status(200).json({  success: true, message:`data found`, data: client });
 });
 
-// Find a single note with a storyId
+// Find a single note with a clientId
 exports.findOne = tryTocatchFn( async (req, res, next) => {
-    const client = await Client.findById(req.params.storyId);
+    const client = await Client.findById(req.params.clientId);
     if (!client) {
         return next(
             new ErrorResponse(`No client found!`, 400)
@@ -69,7 +87,7 @@ exports.findOne = tryTocatchFn( async (req, res, next) => {
     res.status(200).json({  success: true, data: client , message: "client found"});
 });
 
-// Update a note identified by the storyId in the request
+// Update a note identified by the clientId in the request
 exports.update = tryTocatchFn( async (req, res, next) => {
 
     // console.log(req.body);
@@ -81,7 +99,7 @@ exports.update = tryTocatchFn( async (req, res, next) => {
         );
     }
 
-    //find by storyId and update   
+    //find by clientId and update   
     const client = await Client.findByIdAndUpdate(req.params.clientId,
     {
      name, email, message
@@ -91,7 +109,7 @@ exports.update = tryTocatchFn( async (req, res, next) => {
   res.status(200).json({success: true, mesage: "successfully updated", data: client,});
 });
 
-// Delete a note with the specified storyId in the request
+// Delete a note with the specified clientId in the request
 exports.delete = tryTocatchFn( async (req, res, next) =>{
 
     const client = await Client.findByIdAndDelete(req.params.clientId);

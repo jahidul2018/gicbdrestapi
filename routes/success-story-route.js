@@ -3,6 +3,8 @@ const SuccessStoryRouter =express.Router();
 
 const SuccessStory = require('../Controllers/SuccessStoryController');
 
+const { isAdmin } = require('../middleware/auth');
+
 // Routes
     // GET() ->fetching data
     // Post() -> sending data, 

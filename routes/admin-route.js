@@ -15,19 +15,23 @@ const { isAdmin } = require('../middleware/auth');
     AdminRoute.get('/test',  (req, res) => res.send('this is admin test route!'));
     // AdminRoute.post('/signin', (req, res) => {  console.log(req.body)   });
 
-    //signin Admin route
+    // signin Admin route
     AdminRoute.post('/signin', Admin.signin);
 
     // Create a new Admin
     AdminRoute.post('/register', Admin.register);
 
-    //update admin info
+    // update admin info
     AdminRoute.put('/update', isAdmin, Admin.update);
 
-    //admin update password 
+    // admin update password 
     AdminRoute.put('/update-password', isAdmin, Admin.updatePassword);
+
     // Retrieve Admin
     AdminRoute.get('/me', isAdmin, Admin.me);
+
+    // Retrieve all Admin
+    AdminRoute.get('/get', Admin.findAll);
 
 //router-exports-form-route-namespaces
     module.exports = AdminRoute;

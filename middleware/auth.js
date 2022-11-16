@@ -1,6 +1,6 @@
 const tryTocatchFn = require("../middleware/tryTocatchFn");
 const ErrorResponse = require("../helper/errorResponse");
-const AdminModel = require("../models/Admin");
+const AdminModel = require("../Models/Admin");
 const jwt = require("jsonwebtoken");
 
 exports.isAdmin = tryTocatchFn(async (req, res, next) => {

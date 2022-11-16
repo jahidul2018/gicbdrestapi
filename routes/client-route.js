@@ -14,6 +14,7 @@ const Client = require('../Controllers/ClientController');
 
     // Create a new client
     ClientRoute.post('/', Client.create);
+    ClientRoute.post('/step', Client.step);
 
     //send message
     ClientRoute.post('/send-message', Client.sendMessage);

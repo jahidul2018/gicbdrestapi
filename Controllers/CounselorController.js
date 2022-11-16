@@ -1,7 +1,7 @@
 //const { request } = require("express");
 const mongoose = require("mongoose");
 
-const tryTocatchFn = require("../middleware/tryTocatchFn");
+const tryTocatchFn = require("../middleware/tryToCatchFn");
 const ErrorResponse = require("../helper/errorResponse");
 
 const Counselor = require("../Models/Counselor");
@@ -49,8 +49,32 @@ exports.findAll = tryTocatchFn( async (req, res, next) =>
 
 });
 
+// Retrieve and return all counselors from the database.
+exports.openfindAll = tryTocatchFn( async (req, res, next) => 
+{
+    const counselors = await Counselor.find();
+    if (!counselors) {
+        return next(
+            new ErrorResponse(`No counselors found`, 400)
+        );
+    }
+    res.status(200).json({  success: true, data: counselors, message:"Data found"  });
+
+});
+
 // Find a single note with a counselorId
 exports.findOne = tryTocatchFn( async (req, res, next) => {
+    const counselor = await Counselor.findById(req.params.counselorId);
+    if (!counselor) {
+        return next(
+            new ErrorResponse(`No counselors found with this info`, 400)
+        );
+    }
+    res.status(200).json({  success: true, data: counselor , message: "Counselor found"});
+});
+
+// Find a single note with a counselorId
+exports.openfindOne = tryTocatchFn( async (req, res, next) => {
     const counselor = await Counselor.findById(req.params.counselorId);
     if (!counselor) {
         return next(

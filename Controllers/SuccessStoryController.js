@@ -1,7 +1,6 @@
 //const { request } = require("express");
 const mongoose = require("mongoose");
-
-const tryTocatchFn = require("../middleware/tryTocatchFn");
+const tryTocatchFn = require("../middleware/tryToCatchFn");
 const ErrorResponse = require("../helper/errorResponse");
 
 const SuccessStory = require("../Models/SuccessStory");
