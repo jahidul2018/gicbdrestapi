@@ -1,4 +1,4 @@
-const tryTocatchFn = require("../middleware/tryTocatchFn");
+const tryTocatchFn = require("../middleware/tryToCatchFn");
 const ErrorResponse = require("../helper/errorResponse");
 const AdminModel = require("../Models/Admin");
 const jwt = require("jsonwebtoken");
